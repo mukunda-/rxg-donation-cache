@@ -82,7 +82,7 @@ class RXGDonationCache {
 		
 		$row = $result->fetch_row();
 		if( $row === FALSE ) return FALSE;
-		return $row[0];
+		return is_null($row[0]) ? 0 : $row[0];
 	}
 
 	/** ---------------------------------------------------------------------------
@@ -140,6 +140,9 @@ class RXGDonationCache {
 		$row = $result->fetch_row();
 		if( $row === FALSE ) return 0;
 		
+		//echo $condition . '<br>';
+		//print_r( $row );
+		//echo '<br>';
 		return $row[0];
 	}
 
@@ -213,6 +216,7 @@ class RXGDonationCache {
 				$stems[$row[1]] = 1;
 			}
 		}
+		
 		
 		foreach( $users as $user => $poop ) {
 			if( $user == 0 ) continue;
