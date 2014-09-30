@@ -96,7 +96,6 @@ class RXGDonationCache {
 	 */
 	private static function GetExpiryTime( $userid, $steamid, $rate ) {
 		$rate = (float)$rate;
-		$userid = (int)$userid;
 		
 		if( $steamid !== FALSE ) {
 			$steamid = $steamid->Format( SteamID::FORMAT_STEAMID32 );
@@ -105,7 +104,7 @@ class RXGDonationCache {
 			// _ is a single-character wildcard for LIKE.
 		}
 		
-		if( $userid === FALSE ) {
+		if( $userid === FALSE || $userid == 0 ) {
 			if( $steamid === FALSE ) {
 				throw new BadFunctionCallException( 
 					'$userid or $steamid must be set.' );
@@ -113,6 +112,7 @@ class RXGDonationCache {
 			
 			$condition = " option_name2 LIKE '$steamid' ";
 		} else {
+			$userid = (int)$userid;
 			if( $steamid === FALSE ) {
 				$condition = " user_id=$userid ";
 			} else {
