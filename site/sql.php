@@ -75,7 +75,9 @@ function GetSQL() {
 	global $g_sqldb;
 	if( !$g_sqldb ) {
 		$g_sqldb = new MySQLWrapper( $GLOBALS["sql_addr"], $GLOBALS["sql_user"],$GLOBALS["sql_password"],$GLOBALS["sql_database"] );
+	
 		if( $g_sqldb->connect_errno ) {
+			
 			$g_sqldb = null;
 			throw new SQLException( (int)$g_sqldb->connect_errno, "SQL Connection Error: ". (int)$g_sqldb->connect_error );
 		}
