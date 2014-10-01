@@ -7,6 +7,7 @@ class Config {
 
 	// the password clients will use to access the update interface.
 	const ACCESSCODE = 
+	const LOGFILE = 'log.txt';
 	
 }
 
