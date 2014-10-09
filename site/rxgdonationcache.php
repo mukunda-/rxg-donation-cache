@@ -58,7 +58,7 @@ class RXGDonationCache {
 			WHERE userid=$userid" );
 		
 		$row = $result->fetch_row();
-		if( $row === FALSE ) return FALSE;
+		if( $row === NULL ) return FALSE;
 		return SteamID::Parse( $row[0] );
 	}
 
@@ -77,7 +77,7 @@ class RXGDonationCache {
 			WHERE steamid=$stem64" );
 		
 		$row = $result->fetch_row();
-		if( $row === FALSE ) return FALSE;
+		if( $row === NULL ) return FALSE;
 		return is_null($row[0]) ? 0 : $row[0];
 	}
 
@@ -134,7 +134,7 @@ class RXGDonationCache {
 					) AS q1" );
 		
 		$row = $result->fetch_row();
-		if( $row === FALSE ) return 0;
+		if( $row === NULL ) return 0;
 		
 		//echo $condition . '<br>';
 		//print_r( $row );
