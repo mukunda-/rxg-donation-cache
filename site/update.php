@@ -1,13 +1,16 @@
 <?php
-
-// update single
-// update all
-// setup database
+ 
+// update.php?action=update_all
+//   update all entries
+// update.php?action=setup
+//   setup database.
+//
+// must also have &password=<password>
 
 require_once 'config.php';
 
 CheckArgs( 'password', 'action' );
-if( $_GET['password'] != Config::ACCESSCODE ) exit( 'error' );
+if( $_GET['password'] != Config::ACCESSCODE ) exit( 'error.' );
 
 require_once 'rxgdonationcache.php';
 
@@ -37,16 +40,21 @@ function LogStamp() {
 	return "[$time]";
 }
 
-/**
- * Write a line to the log file, prefixed by a timestamp and the remote address.
+/** ---------------------------------------------------------------------------
+ * Write a line to the log file, prefixed by a timestamp and the 
+ * remote address.
  */
 function WriteLog( $line ) {
 	if( Config::LOGFILE == '' ) return;
 	
-	file_put_contents( Config::LOGFILE, LogStamp() . " {$_SERVER['REMOTE_ADDR']} | $line\r\n", FILE_APPEND );
+	file_put_contents( 
+		Config::LOGFILE, 
+		LogStamp() . " {$_SERVER['REMOTE_ADDR']} | $line\r\n", 
+		FILE_APPEND );
 	
 }
-
+/*
+//-----------------------------------------------------------------------------
 $methods[ 'update_stem' ] = function () {
 	CheckArgs( 'steamid' );
 	$steamid = SteamID::Parse( $_GET['steamid'] );
@@ -57,6 +65,7 @@ $methods[ 'update_stem' ] = function () {
 	RXGDonationCache::UpdateStem( $steamid );
 };
 
+//-----------------------------------------------------------------------------
 $methods[ 'update_userid' ] = function () {
 	CheckArgs( 'userid' );
 	
@@ -64,33 +73,35 @@ $methods[ 'update_userid' ] = function () {
 	WriteLog( "Update Userid: $userid" );
 	
 	RXGDonationCache::UpdateUser( $_GET['userid'] );
-};
+};*/
 
+//-----------------------------------------------------------------------------
 $methods[ 'update_all' ] = function () { 
 	WriteLog( "Running Update All." );
 	RXGDonationCache::UpdateAll();
 };
 
+//-----------------------------------------------------------------------------
 $methods[ 'setup' ] = function () {
 	WriteLog( "Running Setup." );
 	RXGDonationCache::SetupDatabase( true );
 };
 
-// ****************************************************************************
+//-----------------------------------------------------------------------------
 
-$action = $_GET['action'];
-
-if( !isset( $methods[$action] ) ) exit( 'error' );
-
+// find method
+$action = $_GET['action']; 
+if( !isset( $methods[$action] ) ) exit( 'error' ); 
 $method = $methods[$action];
 
 try {
-
+	// execute 
 	$method();
 	
 } catch( Exception $e ) {
+	// and catch errors
 	WriteLog( print_r($e,true) );
-	exit( 'problem.' );
+	exit( 'error.' );
 }
 
 exit( 'okay.' );

@@ -1,6 +1,85 @@
-[09/30/14 07:01:39] Update Stem: STEAM_1:1:54499221 / 76561198069264171
-[09/30/14 07:02:33] Update Stem: STEAM_1:1:54499221 / 76561198069264171
-[09/30/14 07:02:44]::1 Update Stem: STEAM_1:1:54499221 / 76561198069264171
-[09/30/14 07:03:10] ::1 - Update Stem: STEAM_1:1:54499221 / 76561198069264171
-[09/30/14 07:03:19] ::1 | Update Stem: STEAM_1:1:54499221 / 76561198069264171
-[09/30/14 12:05:52] ::1 | Update Stem: STEAM_1:1:54499221 / 76561198069264171
+[11/24/14 03:37:08] ::1 | Running Update All.
+[11/24/14 03:37:19] ::1 | Running Update All.
+[11/24/14 03:37:41] ::1 | Running Update All.
+[11/24/14 03:37:48] ::1 | Running Update All.
+[11/24/14 03:37:58] ::1 | Running Update All.
+[11/24/14 03:39:55] ::1 | Running Update All.
+[11/24/14 03:39:59] ::1 | Running Update All.
+[11/24/14 03:40:02] ::1 | Running Update All.
+[11/24/14 03:40:06] ::1 | Running Update All.
+[11/24/14 03:40:10] ::1 | Running Update All.
+[11/24/14 03:40:17] ::1 | Running Update All.
+[11/24/14 03:40:25] ::1 | Running Update All.
+[11/24/14 03:40:32] ::1 | Running Update All.
+[11/24/14 03:40:37] ::1 | Running Update All.
+[11/24/14 03:40:51] ::1 | Running Update All.
+[11/24/14 03:41:05] ::1 | Running Update All.
+[11/24/14 03:41:09] ::1 | Running Update All.
+[11/24/14 03:41:14] ::1 | Running Update All.
+[11/24/14 03:41:16] ::1 | Running Update All.
+[11/24/14 03:41:20] ::1 | Running Update All.
+[11/24/14 05:58:04] ::1 | Running Update All.
+[11/24/14 06:03:16] ::1 | Running Update All.
+[11/24/14 06:03:44] ::1 | Running Update All.
+[11/24/14 06:18:29] ::1 | Running Update All.
+[11/24/14 06:25:42] ::1 | Running Update All.
+[11/24/14 06:26:04] ::1 | Running Update All.
+[11/24/14 06:26:20] ::1 | Running Update All.
+[11/24/14 06:26:25] ::1 | Running Update All.
+[11/24/14 06:26:49] ::1 | Running Update All.
+[11/24/14 06:26:49] ::1 | SQLException Object
+(
+    [code] => 
+    [message:protected] => SQL Error: Unknown column 'aaa' in 'field list'
+    [string:Exception:private] => 
+    [file:protected] => Q:\git\rxg-donation-cache\site\sql.php
+    [line:protected] => 82
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => Q:\git\rxg-donation-cache\site\rxgdonationcache.php
+                    [line] => 214
+                    [function] => NextResult
+                    [class] => MySQLWrapper
+                    [type] => ->
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [file] => Q:\git\rxg-donation-cache\site\update.php
+                    [line] => 85
+                    [function] => UpdateAll
+                    [class] => RXGDonationCache
+                    [type] => ::
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [file] => Q:\git\rxg-donation-cache\site\update.php
+                    [line] => 103
+                    [function] => {closure}
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
+[11/24/14 06:26:55] ::1 | Running Update All.
+[11/24/14 06:28:19] ::1 | Running Update All.
+[11/24/14 06:29:44] ::1 | Running Update All.
+[11/24/14 06:35:43] ::1 | Running Update All.
+[11/24/14 06:35:55] ::1 | Running Update All.

@@ -12,6 +12,7 @@ class RXGDonationCache {
 	 * @param bool $drop Erase existing tables.
 	 */
 	public static function SetupDatabase( $drop ) {
+	
 		$db = GetSQL();
 		if( $drop ) {
 			$db->RunQuery( "DROP TABLE IF EXISTS SteamDonationCache" );
@@ -31,6 +32,9 @@ class RXGDonationCache {
 			expires1 INT NOT NULL COMMENT 'Unixtime of $1/mo expiry.',
 			expires5 INT NOT NULL COMMENT 'Unixtime of $5/mo expiry.'
 		) ENGINE = InnoDB COMMENT = 'Donation cache for forum accounts.'" );
+		
+		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GET" ); 
+		$db->RunQuery( file_get_contents( "sql/DCache_GET.sql" ) );
 		
 	}
 
@@ -170,7 +174,7 @@ class RXGDonationCache {
 	 * @param int $userid Forum account ID.
 	 */
 	public static function UpdateUser( $userid ) {
-		
+	 
 		$steamid = self::GetSteamFromUser( $userid ); 
 		$db = GetSQL();
 		
@@ -190,43 +194,9 @@ class RXGDonationCache {
 	/** ---------------------------------------------------------------------------
 	 * Rebuild ALL data.
 	 */
-	public static function UpdateAll() {
-		self::ResetDatabase();
-		
+	public static function UpdateAll() { 
 		$db = GetSQL();
-		
-		// get a list of user IDs and steam IDs
-		$result = $db->RunQuery( 
-			"SELECT user_id, option_name2 
-			FROM dopro_donations 
-			GROUP BY user_id, option_name2" );
-		
-		$users = array();
-		$stems = array();
-		
-		while( $row = $result->fetch_row() ) {
-			if( !is_null($row[0]) ) {
-				$users[$row[0]] = 1;
-			}
-			if( !is_null($row[1]) ) {
-				$stems[$row[1]] = 1;
-			}
-		}
-		
-		
-		foreach( $users as $user => $poop ) {
-			if( $user == 0 ) continue;
-			self::UpdateUser( (int)$user );
-			set_time_limit( 30 );
-		}
-		
-		foreach( $stems as $stem => $poop ) {
-			$steamid = SteamID::Parse( $stem );
-			if( $steamid === FALSE ) continue;
-			self::UpdateStem( $steamid );
-			set_time_limit( 30 );
-		}
-		
+		$db->MQueryUpdate( file_get_contents( "sql/DCache_Update.sql" ), true );
 	}
 }
 
