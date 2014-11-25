@@ -25,8 +25,6 @@ class SQLException extends Exception {
  */
 class MySQLWrapper extends mysqli {
 
-	private $mquery_has_more_results = false;
-
 	/** -----------------------------------------------------------------------
 	 * Execute a query and throw an SQLException if it fails.
 	 *
