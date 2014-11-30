@@ -21,7 +21,7 @@ class RXGDonationCache {
 		
 		$db->RunQuery( 
 			"CREATE TABLE IF NOT EXISTS SteamDonationCache (
-			steamid INT NOT NULL PRIMARY KEY COMMENT 'Steam ID index.',
+			steamid BIGINT NOT NULL PRIMARY KEY COMMENT 'Steam ID index.',
 			expires1 INT NOT NULL COMMENT 'Unixtime of $1/mo expiry.',
 			expires5 INT NOT NULL COMMENT 'Unixtime of $5/mo expiry.'
 		) ENGINE = InnoDB COMMENT = 'Donation cache for Steam IDs'" );
@@ -33,8 +33,10 @@ class RXGDonationCache {
 			expires5 INT NOT NULL COMMENT 'Unixtime of $5/mo expiry.'
 		) ENGINE = InnoDB COMMENT = 'Donation cache for forum accounts.'" );
 		
-		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GET" ); 
-		$db->RunQuery( file_get_contents( "sql/DCache_GET.sql" ) );
+		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GetSteam" ); 
+		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GetForum" ); 
+		$db->RunQuery( file_get_contents( "sql/DCache_GetSteam.sql" ) );
+		$db->RunQuery( file_get_contents( "sql/DCache_GetForum.sql" ) );
 		
 	}
 
