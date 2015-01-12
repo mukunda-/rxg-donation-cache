@@ -24,14 +24,14 @@ class RXGDonationCache {
 			steamid BIGINT NOT NULL PRIMARY KEY COMMENT 'Steam ID index.',
 			expires1 INT NOT NULL COMMENT 'Unixtime of $1/mo expiry.',
 			expires5 INT NOT NULL COMMENT 'Unixtime of $5/mo expiry.'
-		) ENGINE = InnoDB COMMENT = 'Donation cache for Steam IDs'" );
+		) COMMENT = 'Donation cache for Steam IDs'" );
 		
 		$db->RunQuery( 
 			"CREATE TABLE IF NOT EXISTS UserDonationCache (
 			userid INT NOT NULL PRIMARY KEY COMMENT 'Forum account ID.',
 			expires1 INT NOT NULL COMMENT 'Unixtime of $1/mo expiry.',
 			expires5 INT NOT NULL COMMENT 'Unixtime of $5/mo expiry.'
-		) ENGINE = InnoDB COMMENT = 'Donation cache for forum accounts.'" );
+		) COMMENT = 'Donation cache for forum accounts.'" );
 		
 		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GetSteam" ); 
 		$db->RunQuery( "DROP FUNCTION IF EXISTS DCache_GetForum" ); 

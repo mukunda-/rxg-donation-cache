@@ -7,5 +7,5 @@ FROM
 	FROM dopro_donations
 	LEFT JOIN steamuser ON steamuser.userid = dopro_donations.user_id
 	WHERE (option_name2 REGEXP '^765[0-9]+$' OR steamuser.steamid IS NOT NULL)
-	GROUP BY stem ORDER BY NULL ) AS stemlist
+	GROUP BY stem ORDER BY NULL) AS stemlist
 LEFT JOIN steamuser ON steamuser.steamid = stem
